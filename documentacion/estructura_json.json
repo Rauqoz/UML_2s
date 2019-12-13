@@ -1,0 +1,73 @@
+{
+    "usuario": {
+        "id_user": "id",
+        "nombre": "nombre",
+        "pass": "password",
+        "tipo": "tipo usuario",
+        "nick": "nick"
+    },
+    "contacto": {
+        "id_contacto": "id",
+        "id_user": "id_user",
+        "nombre": "nombre",
+        "telefono": "telefono",
+        "tipo": "tipo",
+        "direccion": "direccion",
+        "correo": "correo",
+        "estatus": "estatus",
+        "oportunidad": "oportunidad"
+    },
+    "inventario": {
+        "id_inventario": "id",
+        "nombre": "nombre",
+        "cantidad": "cantidad",
+        "descripcion": "descripcion"
+    },
+    "curso": {
+        "id_curso": "id",
+        "catedratico": "catedratico",
+        "curso": "seccion",
+        "seccion": "seccion"
+    },
+    "actividad": {
+        "id_actividad": "id",
+        "titulo": "titulo",
+        "expositor": "expositor",
+        "hora": "hora",
+        "lugar": "lugar"
+    },
+    "tarea": {
+        "id_tarea": "id",
+        "titulo": "titulo",
+        "descripcion": "descripcion",
+        "prioridad": "prioridad",
+        "estatus": "estatus"
+    },
+    "presupuesto": {
+        "id": "id",
+        "tipo": "tipo",
+        "cantidad": "cantidad",
+        "descripcion": "descripcion"
+    },
+    "noticia": {
+        "id_noticia": "id",
+        "titulo": "titulo",
+        "descripcion": "descripcion"
+    },
+    "comentario": {
+        "id_comentario": "id",
+        "id_user": "id_user",
+        "id_noticia": "id_noticia",
+        "comentario": "comentario"
+    },
+    "usuario_curso": {
+        "id_curso": {
+            "id_user": "id_user"
+        }
+    },
+    "usuario_actividad": {
+        "id_actividad": {
+            "id_user": "id_user"
+        }
+    }
+}
