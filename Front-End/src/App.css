@@ -1,7 +1,6 @@
 .App {
   text-align: center;
 }
-
 .App-logo {
   height: 40vmin;
   pointer-events: none;
@@ -13,8 +12,9 @@
   }
 }
 
-#body {
-  background-color: #282c34;
+.App-titulo {
+  color: rgba(17, 146, 0, 0.699);
+  font-size: calc(30px + 2vmin);
 }
 
 .App-header {
