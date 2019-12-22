@@ -4,42 +4,31 @@ import axios from "axios";
 
 class Login extends React.Component {
   entrar = () => {
-    if (this.refs.user.value === "" || this.refs.pass.value === "") {
-      alert("Faltan Datos");
-    } else {
-      /*  axios
-        .get("http://localhost:4400/")
-        .then(res => {
-          console.log(
-            "En la Base: " + res.data.root.user + " pass " + res.data.root.pass
-          );
-          if (
-            this.refs.user.value === res.data.root.user &&
-            this.refs.pass.value === res.data.root.pass
-          ) {
-            alert("Bienvenido");
+    axios
+      .post("http://localhost:4000/login", {
+        nick: this.refs.nick.value,
+        pass: this.refs.pass.value,
+        tipo: this.refs.tipo.value
+      })
+      .then(res => {
+        this.refs.nick.value = "";
+        this.refs.pass.value = "";
+        if (res.data === false) {
+          alert("Usuario no Existe");
+        } else {
+          alert("Bienvenido " + res.data.name);
+          if (res.data.tipo === "admin") {
             window.location = "/navAdmin";
-          } else {
-            alert("Datos Erroneos");
+          } else if (res.data.tipo === "estudiante") {
+          } else if (res.data.tipo === "catedratico") {
+          } else if (res.data.tipo === "colaborador") {
           }
-        })
-        .catch(console.log); */
-    }
+        }
+      });
   };
 
   registrar = () => {
-    if (this.refs.user.value === "" || this.refs.pass.value === "") {
-      alert("Faltan Datos");
-    } else {
-      axios
-        .post("http://localhost:4400/", {
-          user: this.refs.user.value,
-          pass: this.refs.pass.value
-        })
-        .then(res => {
-          console.log("Todo Bien");
-        });
-    }
+    window.location = "/register";
   };
 
   render() {
@@ -53,7 +42,7 @@ class Login extends React.Component {
           <input
             className="form-control"
             type="text"
-            ref="user"
+            ref="nick"
             placeholder="Ingresa Usuario"
           />
           <label>Contraseña</label>
@@ -64,7 +53,6 @@ class Login extends React.Component {
             placeholder="Ingresa Contraseña"
           />
           <label>Tipo Usuario</label>
-          <br />
           <select className="form-control" ref="tipo">
             <option value="estudiante">Estudiante</option>
             <option value="catedratico">Catedratico</option>
