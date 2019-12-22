@@ -1,24 +1,45 @@
 import React from "react";
 import "../App.css";
+import axios from "axios";
 
 class Login extends React.Component {
   entrar = () => {
     if (this.refs.user.value === "" || this.refs.pass.value === "") {
-      alert("Faltan Datos ");
+      alert("Faltan Datos");
     } else {
-      if (
-        this.refs.user.value === "admin" ||
-        this.refs.pass.value === "admin"
-      ) {
-        alert("Si");
-        window.location = "/navAdmin";
-      } else {
-      }
+      /*  axios
+        .get("http://localhost:4400/")
+        .then(res => {
+          console.log(
+            "En la Base: " + res.data.root.user + " pass " + res.data.root.pass
+          );
+          if (
+            this.refs.user.value === res.data.root.user &&
+            this.refs.pass.value === res.data.root.pass
+          ) {
+            alert("Bienvenido");
+            window.location = "/navAdmin";
+          } else {
+            alert("Datos Erroneos");
+          }
+        })
+        .catch(console.log); */
     }
   };
 
-  state = {
-    h: "hola data"
+  registrar = () => {
+    if (this.refs.user.value === "" || this.refs.pass.value === "") {
+      alert("Faltan Datos");
+    } else {
+      axios
+        .post("http://localhost:4400/", {
+          user: this.refs.user.value,
+          pass: this.refs.pass.value
+        })
+        .then(res => {
+          console.log("Todo Bien");
+        });
+    }
   };
 
   render() {
@@ -52,7 +73,9 @@ class Login extends React.Component {
         </div>
         <br />
         <div>
-          <button className=" btn-lg btn-danger">Registrar</button>
+          <button className=" btn-lg btn-danger" onClick={this.registrar}>
+            Registrar
+          </button>
           <button className=" btn-lg btn-success" onClick={this.entrar}>
             Entrar
           </button>
