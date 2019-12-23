@@ -3,6 +3,9 @@ import "../App.css";
 import axios from "axios";
 
 class Login extends React.Component {
+  state = {
+    datos: {}
+  };
   entrar = () => {
     axios
       .post("http://localhost:4000/login", {
@@ -16,6 +19,7 @@ class Login extends React.Component {
         if (res.data === false) {
           alert("Usuario no Existe");
         } else {
+          this.state.datos = res.data;
           alert("Bienvenido " + res.data.name);
           if (res.data.tipo === "admin") {
             window.location = "/navAdmin";

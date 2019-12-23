@@ -1,7 +1,7 @@
 const express = require("express");
 const server = express();
 const cors = require("cors");
-var vid_user = 0;
+var contadorId = 0;
 var dinamic = {
   usuarios: [
     {
@@ -55,9 +55,9 @@ server.post("/login", (req, res) => {
 });
 
 server.post("/register", (req, res) => {
-  vid_user + 1;
+  contadorId++;
   dinamic.usuarios.push({
-    id_user: vid_user,
+    id_user: contadorId,
     name: req.body.name,
     fecha: { dia: req.body.dia, mes: req.body.mes, año: req.body.año },
     telefono: req.body.telefono,
@@ -70,31 +70,6 @@ server.post("/register", (req, res) => {
   });
   res.json("Recibido");
 });
-
-/* entrar = () => {
-  if (this.refs.user.value === "" || this.refs.pass.value === "") {
-    alert("Faltan Datos");
-  } else {
-    axios
-      .get("http://localhost:4400/")
-      .then(res => {
-        console.log(
-          "En la Base: " + res.data.root.user + " pass " + res.data.root.pass
-        );
-        if (
-          this.refs.user.value === res.data.root.user &&
-          this.refs.pass.value === res.data.root.pass
-        ) {
-          alert("Bienvenido");
-          window.location = "/navAdmin";
-        } else {
-          alert("Datos Erroneos");
-        }
-      })
-      .catch(console.log);
-  }
-};
- */
 
 server.listen(4000, () => {
   console.log("Back-End Activo");
