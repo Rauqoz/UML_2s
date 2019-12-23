@@ -1,48 +1,11 @@
 import React from "react";
 import "../App.css";
-import axios from "axios";
+import Axios from "axios";
 
-class Register extends React.Component {
+class Perfil extends React.Component {
   paraDias = [];
   paraMes = [];
   paraAño = [];
-
-  login = () => {
-    window.location = "/";
-  };
-
-  registrar = () => {
-    if (
-      this.refs.name.value === "" ||
-      this.refs.telefono.value === "" ||
-      this.refs.correo.value === "" ||
-      this.refs.universidad.value === "" ||
-      this.refs.nick.value === "" ||
-      this.refs.pass.value === "" ||
-      this.refs.nacionalidad.value === ""
-    ) {
-      alert("Campos Vacios");
-    } else {
-      axios
-        .post("http://localhost:4000/register", {
-          name: this.refs.name.value,
-          dia: this.refs.dia.value,
-          mes: this.refs.mes.value,
-          año: this.refs.año.value,
-          telefono: this.refs.telefono.value,
-          correo: this.refs.correo.value,
-          universidad: this.refs.universidad.value,
-          nick: this.refs.nick.value,
-          pass: this.refs.pass.value,
-          nacionalidad: this.refs.nacionalidad.value,
-          tipo: this.refs.tipo.value
-        })
-        .then(res => {
-          alert("Registrado");
-          window.location = "/";
-        });
-    }
-  };
 
   cargaFechas = () => {
     for (let index = 0; index < 31; index++) {
@@ -54,15 +17,32 @@ class Register extends React.Component {
     for (let index = 2000; index < 2019; index++) {
       this.paraAño.push(<option value={index + 1}>{index + 1}</option>);
     }
+    Axios.get("http://localhost:4000/perfil").then(res => {
+      this.refs.name.value = res.data.name;
+    });
+  };
+
+  modificar = () => {
+    Axios.post("http://localhost:4000/modificar", {
+      name: this.refs.name.value,
+      dia: this.refs.dia.value,
+      mes: this.refs.mes.value,
+      año: this.refs.año.value,
+      telefono: this.refs.telefono.value,
+      correo: this.refs.correo.value,
+      universidad: this.refs.universidad.value,
+      nick: this.refs.nick.value,
+      pass: this.refs.pass.value,
+      nacionalidad: this.refs.nacionalidad.value
+    }).then(res => {
+      alert("Modificado");
+    });
   };
 
   render() {
     this.cargaFechas();
     return (
       <div className=" App-header">
-        <div className=" App-titulo">
-          <label>Registrate</label>
-        </div>
         <div className="text-center">
           <label>Nombre</label>
           <input
@@ -109,6 +89,7 @@ class Register extends React.Component {
           />
           <label>Nickname</label>
           <input
+            disabled
             className="form-control"
             type="text"
             ref="nick"
@@ -128,19 +109,11 @@ class Register extends React.Component {
             ref="nacionalidad"
             placeholder="Ingresa Nacionalidad"
           />
-          <label>Tipo Usuario</label>
-          <select className="form-control" ref="tipo">
-            <option value="estudiante">Estudiante</option>
-            <option value="catedratico">Catedratico</option>
-          </select>
         </div>
         <br />
         <div>
-          <button className=" btn-lg btn-danger" onClick={this.login}>
-            Poseo una Cuenta!
-          </button>
-          <button className=" btn-lg btn-success" onClick={this.registrar}>
-            Registrar
+          <button className=" btn-lg btn-success" onClick={this.modificar}>
+            Modificar
           </button>
         </div>
       </div>
@@ -148,4 +121,4 @@ class Register extends React.Component {
   }
 }
 
-export default Register;
+export default Perfil;

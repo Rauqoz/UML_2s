@@ -35,6 +35,10 @@ class Login extends React.Component {
     window.location = "/register";
   };
 
+  prueba = () => {
+    alert(this.refs.tipo);
+  };
+
   render() {
     return (
       <div className=" App-header">
@@ -65,7 +69,7 @@ class Login extends React.Component {
         </div>
         <br />
         <div>
-          <button className=" btn-lg btn-danger" onClick={this.registrar}>
+          <button className=" btn-lg btn-danger" onClick={this.prueba}>
             Registrar
           </button>
           <button className=" btn-lg btn-success" onClick={this.entrar}>
